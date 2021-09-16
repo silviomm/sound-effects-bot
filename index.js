@@ -7,7 +7,8 @@ var bot = new TelegramBot(token, {
 });
 
 bot.onText(/\/(.+)/, async (msg, match) => {
-    const path = `audios/${match[1]}.mp3`;
+    let path = `audios/${match[1]}.mp3`;
+    path = path.replace('@sound_effects_bot', '');
     if(fs.existsSync(path)) {
         const stream = fs.createReadStream(path);
         bot.sendAudio(msg.chat.id, stream);
