@@ -1,7 +1,7 @@
 var TelegramBot = require('node-telegram-bot-api');
 var fs = require('fs');
 
-var token = "";
+var token = process.env.BOT_TOKEN;
 var bot = new TelegramBot(token, {
     polling: true
 });
@@ -16,3 +16,6 @@ bot.onText(/\/(.+)/, async (msg, match) => {
         bot.sendAudio(msg.chat.id, stream);
     }
 });
+
+const server = require('./src/server');
+server.init();
